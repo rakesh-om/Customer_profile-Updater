@@ -1,0 +1,93 @@
+<div class="customer-profile-card page-width">
+  <div class="profile-container">
+    <h2 class="h3">{{ block.settings.heading }}</h2>
+    
+    <div class="profile-grid">
+      <div class="field">
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender">
+          <option value="">Select Gender</option>
+          <option value="male" {% if customer.metafields.custom_profile.gender == 'male' %}selected{% endif %}>Male</option>
+          <option value="female" {% if customer.metafields.custom_profile.gender == 'female' %}selected{% endif %}>Female</option>
+          <option value="other" {% if customer.metafields.custom_profile.gender == 'other' %}selected{% endif %}>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="marriage_date">Marriage Date</label>
+        <input type="date" id="marriage_date" value="{{ customer.metafields.custom_profile.marriage_date.value }}">
+      </div>
+
+      <div class="field">
+        <label for="anniversary">Anniversary</label>
+        <input type="date" id="anniversary" value="{{ customer.metafields.custom_profile.anniversary.value }}">
+      </div>
+    </div>
+
+    <button type="button" id="save-profile-btn">
+      <span class="btn-text">Save Changes</span>
+      <span class="loading-overlay__spinner hidden">Updating...</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .profile-container { padding: 2rem; border: 1px solid #ccc; border-radius: 8px; background: #fff; }
+  .profile-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  @media screen and (min-width: 750px) { .profile-grid { grid-template-columns: repeat(3, 1fr); } }
+  .field { display: flex; flex-direction: column; gap: 0.5rem; }
+  .hidden { display: none; }
+</style>
+
+<script>
+  document.getElementById('save-profile-btn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    const btnText = btn.querySelector('.btn-text');
+    btn.disabled = true;
+    btnText.innerText = 'Saving...';
+
+    const data = {
+      customerId: "{{ customer.id }}",
+      gender: document.getElementById('gender').value,
+      marriage_date: document.getElementById('marriage_date').value,
+      anniversary: document.getElementById('anniversary').value
+    };
+
+    console.log('🔹 Sending data:', data);
+
+    try {
+      const response = await fetch('/apps/profile/api/getcustomerdata', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      console.log('📄 Response:', result);
+
+      if (response.ok && result.success) {
+        alert('Profile updated successfully!');
+      } else {
+        alert('Failed to update profile.');
+      }
+    } catch (err) {
+      console.error('🔥 Error updating profile:', err);
+      alert('Error updating profile.');
+    } finally {
+      btn.disabled = false;
+      btnText.innerText = 'Save Changes';
+    }
+  });
+</script>
+{% schema %}
+{
+  "name": "Customer Profile Fields",
+  "target": "section",
+  "enabled_on": {
+    "templates": ["customers/account"]
+  },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Personal Milestones" }
+  ]
+}
+{% endschema %}

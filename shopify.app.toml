@@ -1,0 +1,66 @@
+client_id = "2b6476d4fc64c6fd631ec8be4a955b99"
+name = "selleasy-upsell-crosell"
+application_url = "https://5f5e731a43e3.ngrok-free.app"
+embedded = true
+handle = "selleasy-upsell-crosell-2"
+
+[webhooks]
+api_version = "2025-10"
+
+[[webhooks.subscriptions]]
+topics = ["app/scopes_update"]
+uri = "/webhooks/app/scopes_update"
+
+
+
+
+[[webhooks.subscriptions]]
+topics = ["app/uninstalled"]
+uri = "/webhooks/app/uninstalled"
+
+[customer.metafields.custom_profile.gender]
+type = "single_line_text_field"
+name = "Gender"
+description = "Customer gender"
+access.customer_account = "read_write"
+access.admin = "merchant_read"
+
+[customer.metafields.custom_profile.date_of_birth]
+type = "date"
+name = "Date of birth"
+description = "Customer date of birth"
+access.customer_account = "read_write"
+access.admin = "merchant_read"
+
+[customer.metafields.custom_profile.anniversary]
+type = "date"
+name = "Anniversary"
+description = "Customer anniversary date"
+access.customer_account = "read_write"
+access.admin = "merchant_read"
+
+
+ [[extensions.metafields]]
+   namespace = "$app:selleasy_app_settings"
+   key = "customer_profile_fields"
+
+[access_scopes]
+scopes = "read_metaobjects,write_metaobjects,customer_write_customers,customer_read_customers,read_customers,read_draft_orders,read_products,read_themes,write_customers,write_draft_orders,write_markets,write_products,write_script_tags,write_themes"
+
+[auth]
+redirect_urls = [
+  "https://5f5e731a43e3.ngrok-free.app/auth/callback",
+  "https://5f5e731a43e3.ngrok-free.app/auth/shopify/callback",
+  "https://5f5e731a43e3.ngrok-free.app/api/auth/callback"
+]
+
+[app_proxy]
+url = "https://5f5e731a43e3.ngrok-free.app"
+subpath = "profile"
+prefix = "apps"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true

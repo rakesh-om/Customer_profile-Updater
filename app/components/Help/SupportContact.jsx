@@ -20,11 +20,11 @@ export default function SupportContact() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "100%", // make box take full height of grid row
+              height: "100%", 
             }}
           >
             <img
-              src="/OMLogo.svg" // Replace with your uploaded logo path if needed
+              src="/OMLogo.svg" 
               alt="OrangeMantra"
               style={{
                 maxWidth: "140px",
@@ -34,7 +34,6 @@ export default function SupportContact() {
             />
           </Box>
 
-          {/* Content */}
           <BlockStack gap="300">
             <Text variant="headingLg" as="h2">
               Need Help or Support?

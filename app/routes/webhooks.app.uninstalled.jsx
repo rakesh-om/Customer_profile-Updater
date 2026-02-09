@@ -134,12 +134,7 @@ export const action = async ({ request }) => {
       console.error("❌ Error deleting shop settings metafield:", err);
     }
 
-    /* ===============================
-       4️⃣ (OPTIONAL) DELETE OTHER APP DB DATA
-       =============================== */
-    // Example (uncomment if you have these tables)
-    // await db.settings.deleteMany({ where: { shop } });
-    // await db.logs.deleteMany({ where: { shop } });
+  
 
     console.log(`🎉 Full cleanup completed for ${shop}`);
   } catch (err) {

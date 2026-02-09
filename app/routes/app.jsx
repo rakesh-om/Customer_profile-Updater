@@ -24,6 +24,8 @@ export default function App() {
         <s-app-nav>
           <s-link href="/app">Home</s-link>
           <s-link href="/app/userguide">User Guide</s-link>
+          <s-link href="/app/contact">Contact</s-link>
+
         </s-app-nav>
 
         <Outlet />

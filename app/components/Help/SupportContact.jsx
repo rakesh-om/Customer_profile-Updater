@@ -1,0 +1,73 @@
+import React from "react";
+import { Card, BlockStack, InlineGrid, Text, Button, Box } from "@shopify/polaris";
+import { EmailIcon, ExternalIcon } from "@shopify/polaris-icons";
+
+export default function SupportContact() {
+  return (
+    <Card padding="600">
+      <BlockStack gap="500">
+        <InlineGrid
+          columns={["oneThird", "twoThirds"]}
+          gap="500"
+          align="center"
+        >
+          {/* Logo */}
+          <Box
+            padding="200"
+            background="bg-surface-secondary"
+            borderRadius="200"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%", // make box take full height of grid row
+            }}
+          >
+            <img
+              src="/OMLogo.svg" // Replace with your uploaded logo path if needed
+              alt="OrangeMantra"
+              style={{
+                maxWidth: "140px",
+                width: "100%",
+                display: "block",
+              }}
+            />
+          </Box>
+
+          {/* Content */}
+          <BlockStack gap="300">
+            <Text variant="headingLg" as="h2">
+              Need Help or Support?
+            </Text>
+
+            <Text tone="subdued">
+              This app is developed and maintained by <strong>OrangeMantra</strong>.  
+              Our Shopify experts are available to assist you with setup, configuration, 
+              and any technical questions related to this app.
+            </Text>
+
+            <InlineGrid columns={["fill", "fill"]} gap="400">
+              <Button
+                icon={EmailIcon}
+                url="mailto:contact@orangemantra.com"
+                fullWidth
+              >
+                Contact Support
+              </Button>
+
+              <Button
+                variant="primary"
+                icon={ExternalIcon}
+                url="https://www.orangemantra.com/get-a-quote/"
+                target="_blank"
+                fullWidth
+              >
+                Request Custom Development
+              </Button>
+            </InlineGrid>
+          </BlockStack>
+        </InlineGrid>
+      </BlockStack>
+    </Card>
+  );
+}

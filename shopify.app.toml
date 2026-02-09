@@ -1,6 +1,6 @@
 client_id = "2b6476d4fc64c6fd631ec8be4a955b99"
 name = "selleasy-upsell-crosell"
-application_url = "https://5f5e731a43e3.ngrok-free.app"
+application_url = "https://76b0-2401-4900-5025-5a42-cb2d-c7a7-f50d-6253.ngrok-free.app"
 embedded = true
 handle = "selleasy-upsell-crosell-2"
 
@@ -10,9 +10,6 @@ api_version = "2025-10"
 [[webhooks.subscriptions]]
 topics = ["app/scopes_update"]
 uri = "/webhooks/app/scopes_update"
-
-
-
 
 [[webhooks.subscriptions]]
 topics = ["app/uninstalled"]
@@ -49,13 +46,13 @@ scopes = "read_metaobjects,write_metaobjects,customer_write_customers,customer_r
 
 [auth]
 redirect_urls = [
-  "https://5f5e731a43e3.ngrok-free.app/auth/callback",
-  "https://5f5e731a43e3.ngrok-free.app/auth/shopify/callback",
-  "https://5f5e731a43e3.ngrok-free.app/api/auth/callback"
+  "https://76b0-2401-4900-5025-5a42-cb2d-c7a7-f50d-6253.ngrok-free.app/auth/callback",
+  "https://76b0-2401-4900-5025-5a42-cb2d-c7a7-f50d-6253.ngrok-free.app/auth/shopify/callback",
+  "https://76b0-2401-4900-5025-5a42-cb2d-c7a7-f50d-6253.ngrok-free.app/api/auth/callback"
 ]
 
 [app_proxy]
-url = "https://5f5e731a43e3.ngrok-free.app"
+url = "https://76b0-2401-4900-5025-5a42-cb2d-c7a7-f50d-6253.ngrok-free.app"
 subpath = "profile"
 prefix = "apps"
 

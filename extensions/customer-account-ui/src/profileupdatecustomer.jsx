@@ -12,7 +12,7 @@ const API_VERSION = "2026-01";
 
 
 
-const SETTINGS_NAMESPACE = "$app:selleasy_app_settings";
+const SETTINGS_NAMESPACE = "selleasy_app_settings";
 const SETTINGS_KEY = "customer_profile_fields";
 
 const CUSTOMER_NAMESPACE = "$app:custom_profile";

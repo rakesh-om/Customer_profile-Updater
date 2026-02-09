@@ -1,6 +1,7 @@
 import { useLoaderData, useFetcher } from "react-router";
+import { Page, Layout } from "@shopify/polaris";
 import { authenticate } from "../shopify.server";
-import { AdminSettingsPageUI } from "../components/AdminSettingsPageUI";
+import Home from "../components/Homepage/Home";
 
 const SETTINGS_NAMESPACE = "selleasy_app_settings";
 const SETTINGS_KEY = "customer_profile_fields";
@@ -14,22 +15,8 @@ const DEFAULT_FIELDS = {
 export const loader = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
 
-  // You can still fetch currentAppInstallation if needed for other reasons
-  const appQuery = await admin.graphql(`
-    query {
-      currentAppInstallation {
-        id
-      }
-    }
-  `);
-
-  const appJson = await appQuery.json();
-  const appInstallationId = appJson?.data?.currentAppInstallation?.id;
-  console.log("🆔 loader AppInstallationId:", appInstallationId);
-
-  // Load settings from SHOP metafield
   const settingsQuery = await admin.graphql(`
-    query GetSettingsForLoader {
+    query {
       shop {
         metafield(namespace: "${SETTINGS_NAMESPACE}", key: "${SETTINGS_KEY}") {
           value
@@ -38,31 +25,20 @@ export const loader = async ({ request }) => {
     }
   `);
 
-  const settingsJson = await settingsQuery.json();
-  const rawValue = settingsJson?.data?.shop?.metafield?.value || "[]";
+  const json = await settingsQuery.json();
+  const rawValue = json?.data?.shop?.metafield?.value || "[]";
 
-  let parsedArray;
+  let parsed = [];
   try {
-    parsedArray = JSON.parse(rawValue); // should be an array of keys
-  } catch (e) {
-    parsedArray = [];
-  }
-
-  if (!Array.isArray(parsedArray)) {
-    parsedArray = [];
-  }
+    parsed = JSON.parse(rawValue);
+  } catch {}
 
   const initialFields = { ...DEFAULT_FIELDS };
-  parsedArray.forEach((key) => {
-    if (key in initialFields) {
-      initialFields[key] = true;
-    }
+  parsed.forEach((key) => {
+    if (key in initialFields) initialFields[key] = true;
   });
 
-  return new Response(JSON.stringify({ initialFields }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  return Response.json({ initialFields });
 };
 
 export default function AdminSettingsPage() {
@@ -70,17 +46,12 @@ export default function AdminSettingsPage() {
   const { initialFields } = useLoaderData();
 
   return (
-    <AdminSettingsPageUI
-      fetcher={fetcher}
-      initialFields={initialFields}
-      onSave={(fields) => {
-        const selectedFields = Object.keys(fields).filter((k) => fields[k]);
-
-        fetcher.submit(
-          { selectedFields: JSON.stringify(selectedFields) },
-          { method: "post", action: "/api/updatedata" }
-        );
-      }}
-    />
+    <Page title="Customer Profile">
+      <Layout>
+        <Layout.Section>
+          <Home fetcher={fetcher} initialFields={initialFields} />
+        </Layout.Section>
+      </Layout>
+    </Page>
   );
 }

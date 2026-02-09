@@ -1,7 +1,7 @@
 import { authenticate } from "../shopify.server";
 
 const SETTINGS_NAMESPACE = "selleasy_app_settings";
-const CUSTOMER_NAMESPACE = "selleasy_custom_profile"; //App prefix mandatory, matches extension
+const CUSTOMER_NAMESPACE = "selleasy_custom_profile"; 
 const ALLOWED_FIELDS = ["gender", "date_of_birth", "anniversary"];
 
 

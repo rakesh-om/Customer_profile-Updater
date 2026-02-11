@@ -7,7 +7,7 @@ export default function SupportContact() {
     <Card padding="600">
       <BlockStack gap="500">
         <InlineGrid
-          columns={["oneThird", "twoThirds"]}
+          columns={{ xs: "1", md: "1fr 2fr" }} // Better responsive handling
           gap="500"
           align="center"
         >
@@ -21,6 +21,7 @@ export default function SupportContact() {
               justifyContent: "center",
               alignItems: "center",
               height: "100%", 
+              minHeight: "100px" // Added for consistency
             }}
           >
             <img
@@ -45,11 +46,11 @@ export default function SupportContact() {
               and any technical questions related to this app.
             </Text>
 
-            <InlineGrid columns={["fill", "fill"]} gap="400">
+            <InlineGrid columns={2} gap="400">
               <Button
                 icon={EmailIcon}
                 url="mailto:contact@orangemantra.com"
-                fullWidth
+                external
               >
                 Contact Support
               </Button>
@@ -59,7 +60,7 @@ export default function SupportContact() {
                 icon={ExternalIcon}
                 url="https://www.orangemantra.com/get-a-quote/"
                 target="_blank"
-                fullWidth
+                external 
               >
                 Request Custom Development
               </Button>

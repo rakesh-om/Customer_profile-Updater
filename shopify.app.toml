@@ -1,6 +1,6 @@
 client_id = "2b6476d4fc64c6fd631ec8be4a955b99"
 name = "selleasy-upsell-crosell"
-application_url = "https://9361-2401-4900-54fa-7527-781f-636c-17d-ca00.ngrok-free.app"
+application_url = "https://d82e-2409-4042-278e-657e-582a-640e-50cd-5827.ngrok-free.app"
 embedded = true
 handle = "selleasy-upsell-crosell-2"
 
@@ -46,13 +46,13 @@ scopes = "read_metaobjects,write_metaobjects,customer_write_customers,customer_r
 
 [auth]
 redirect_urls = [
-  "https://9361-2401-4900-54fa-7527-781f-636c-17d-ca00.ngrok-free.app/auth/callback",
-  "https://9361-2401-4900-54fa-7527-781f-636c-17d-ca00.ngrok-free.app/auth/shopify/callback",
-  "https://9361-2401-4900-54fa-7527-781f-636c-17d-ca00.ngrok-free.app/api/auth/callback"
+  "https://d82e-2409-4042-278e-657e-582a-640e-50cd-5827.ngrok-free.app/auth/callback",
+  "https://d82e-2409-4042-278e-657e-582a-640e-50cd-5827.ngrok-free.app/auth/shopify/callback",
+  "https://d82e-2409-4042-278e-657e-582a-640e-50cd-5827.ngrok-free.app/api/auth/callback"
 ]
 
 [app_proxy]
-url = "https://9361-2401-4900-54fa-7527-781f-636c-17d-ca00.ngrok-free.app"
+url = "https://d82e-2409-4042-278e-657e-582a-640e-50cd-5827.ngrok-free.app"
 subpath = "profile"
 prefix = "apps"
 
@@ -61,3 +61,7 @@ embedded = false
 
 [build]
 automatically_update_urls_on_dev = true
+
+
+
+
